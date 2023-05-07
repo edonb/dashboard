@@ -160,3 +160,32 @@ h2 {
       transform: translateX(-100%);
     }
   }
+
+  /* Responsive design for mobile devices */
+@media (max-width: 767px) {
+    .container {
+      width: 90%;
+      font-size: 14px;
+    }
+  
+    .crypto-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+  
+    .crypto-card img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+  
+    .weather-item h2 {
+      font-size: 16px;
+    }
+  
+    .weather-item .temperature {
+      font-size: 14px;
+    }
+  }
+  
