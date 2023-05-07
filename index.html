@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Dashboard</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Velkommen!</h1>
+
+        <div class="weather-marquee">
+            <div class="weather-items">
+                <div class="weather-item" id="oslo">
+                    <h2>Oslo</h2>
+                    <p class="temperature"></p>
+                    <i class="wi weather-icon"></i>
+                </div>
+                <div class="weather-item" id="sarpsborg">
+                    <h2>Sarpsborg</h2>
+                    <p class="temperature"></p>
+                    <i class="wi weather-icon"></i>
+                </div>
+                <div class="weather-item" id="nice">
+                    <h2>Nice</h2>
+                    <p class="temperature"></p>
+                    <i class="wi weather-icon"></i>
+                </div>
+                <div class="weather-item" id="monaco">
+                    <h2>Monaco</h2>
+                    <p class="temperature"></p>
+                    <i class="wi weather-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card" id="btc">
+                <h2>Bitcoin</h2>
+                <p class="price"></p>
+            </div>
+            <div class="card" id="eth">
+                <h2>Ethereum</h2>
+                <p class="price"></p>
+            </div>
+            <div class="card" id="ltc">
+                <h2>Litecoin</h2>
+                <p class="price"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

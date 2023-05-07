@@ -1,0 +1,162 @@
+body {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #262626;
+    border-radius: 5px;
+    padding: 20px;
+    width: 30%;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+}
+
+.weather {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.weather-card {
+    background-color: #262626;
+    border-radius: 5px;
+    padding: 20px;
+    width: 45%;
+}
+
+.temperature {
+    font-size: 24px;
+}
+
+.wi {
+    font-size: 48px; 
+}
+
+
+.wi-day-sunny,
+.wi-day-cloudy {
+    color: #f4d942;
+}
+
+.wi-night-clear,
+.wi-night-alt-cloudy {
+    color: #3d6cb9;
+}
+
+.wi-cloudy,
+.wi-cloud,
+.wi-day-cloudy-high,
+.wi-night-alt-cloudy-high {
+    color: #9da9b1;
+}
+
+.wi-rain,
+.wi-sprinkle,
+.wi-showers,
+.wi-day-showers,
+.wi-night-alt-showers {
+    color: #51a0ed;
+}
+
+.wi-thunderstorm,
+.wi-storm-showers,
+.wi-snow-thunderstorm {
+    color: #ff6b61;
+}
+
+.wi-sleet,
+.wi-sleet-storm,
+.wi-day-sleet-storm,
+.wi-night-alt-sleet-storm {
+    color: #7b93db;
+}
+
+.wi-snow,
+.wi-day-snow,
+.wi-night-alt-snow {
+    color: #a2e2ff;
+}
+
+.wi-fog {
+    color: #a4aab3;
+}
+
+.wi-na {
+    color: #cfd3d7;
+}
+
+
+.weather-marquee {
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+    margin-top: 40px;
+    background-color: #262626;
+    border-radius: 5px;
+  }
+  
+  .weather-items {
+    display: flex;
+    position: absolute;
+    animation: marquee 15s linear infinite;
+  }
+  
+  .weather-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 20px;
+    white-space: nowrap;
+  }
+
+  .weather-item h2 {
+    font-size: 18px;
+    font-weight: 500; 
+    margin: 0 10px 0 0; 
+  }
+  
+  .weather-item .temperature {
+    font-size: 16px; 
+    margin: 0 10px; 
+  }
+  
+  .weather-item .wi {
+    vertical-align: middle; 
+  }
+  
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
