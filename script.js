@@ -1,5 +1,6 @@
 const apiUrl = "https://api.binance.com/api/v3/ticker/24hr";
 
+
 const symbols = {
     btc: "BTCUSDT",
     eth: "ETHUSDT",
@@ -14,8 +15,9 @@ async function fetchData(symbol) {
 
 async function updatePrices() {
     for (const coin in symbols) {
-        const price = await fetchData(symbols[coin]);
-        document.getElementById(coin).querySelector('.price').textContent = `$ ${price}`;
+        const price = Number(await fetchData(symbols[coin]));
+        document.getElementById(coin).querySelector('.price').textContent = `$ ${price.toFixed(2)}`;
+        
     }
 }
 
@@ -32,6 +34,10 @@ const locations = {
     sarpsborg: {
         lat: 59.2831,
         lon: 11.1097
+    },
+    copenhagen: {
+        lat: 55.6761,
+        lon: 12.5683
     },
     nice: {
         lat: 43.7102,
@@ -141,3 +147,79 @@ setInterval(updateWeather, 600000);
 setInterval(function() {
     location.reload();
   }, 1800000);
+
+
+  function setGreeting() {
+    const hour = new Date().getHours();
+    const greetingElem = document.querySelector('.greeting');
+  
+    if (hour >= 6 && hour < 12) {
+      greetingElem.textContent = 'God morgen';
+    } else if (hour >= 12 && hour < 18) {
+      greetingElem.textContent = 'God ettermiddag';
+    } else if (hour >= 18 && hour < 24) {
+      greetingElem.textContent = 'God kveld';
+    } else {
+      greetingElem.textContent = 'God natt';
+    }
+  }
+  
+  setGreeting();
+  window.onload = function() {
+    setGreeting();
+    updatePrices();
+    updateWeather();
+  };
+
+  async function updateNewsFeed() {
+    const rssUrl = 'https://www.vg.no/rss/feed?categories=1069%2C1070';
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
+    const parser = new RSSParser();
+    const response = await fetch(proxyUrl);
+    const data = await response.json();
+    const feed = await parser.parseString(data.contents);
+    console.log(feed)
+  
+    const items = feed.items;
+    const marqueeElem = document.querySelector('.marquee');
+  
+    marqueeElem.innerHTML = '';
+  
+
+    const newsList = document.createElement('ul');
+    items.forEach(item => {
+      const category = item.categories[0];
+      const description = item.contentSnippet;
+      const liElem = document.createElement('li');
+      liElem.innerHTML = `<span class="category">${category} ~</span>  ${description}`;
+      newsList.appendChild(liElem);
+    });
+  
+
+    const newsItems = newsList.querySelectorAll('li');
+    const newsCount = newsItems.length;
+    for (let i = 0; i < newsCount; i++) {
+      const cloneElem = newsItems[i].cloneNode(true);
+      newsList.appendChild(cloneElem);
+    }
+  
+
+    marqueeElem.appendChild(newsList);
+  
+
+    marqueeElem.style.whiteSpace = 'nowrap';
+    marqueeElem.style.overflow = 'hidden';
+    newsList.style.display = 'inline-block';
+    newsList.style.padding = '0 1.5rem';
+    newsList.style.animation = `marquee ${newsCount * 10}s linear infinite`;
+  
+
+    const categoryElems = newsList.querySelectorAll('.category');
+    categoryElems.forEach(categoryElem => {
+      categoryElem.style.fontWeight = 'bold';
+    });
+  }
+  
+  updateNewsFeed();
+  
+  

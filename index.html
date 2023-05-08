@@ -8,12 +8,19 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css" />
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Velkommen!</h1>
+        <div class="news-feed">
+            <div class="greeting"></div>
+            <ul class="marquee">
+            </ul>
+        </div>
+    </div>
 
+    <div class="main-div">
         <div class="weather-marquee">
             <div class="weather-items">
                 <div class="weather-item" id="oslo">
@@ -25,6 +32,11 @@
                     <h2>Sarpsborg</h2>
                     <p class="temperature"></p>
                     <i class="wi weather-icon"></i>
+                </div>
+                <div class="weather-item" id="copenhagen">
+                    <h2>Copenhagen</h2>
+                    <p class="temperature"></p>
+                    <i class="fas weather-icon"></i>
                 </div>
                 <div class="weather-item" id="nice">
                     <h2>Nice</h2>
@@ -41,20 +53,29 @@
 
         <div class="dashboard">
             <div class="card" id="btc">
-                <h2>Bitcoin</h2>
-                <p class="price"></p>
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=025" alt="Bitcoin" />
+                <span class="price"></span>
+                <canvas id="btc-chart" class="chart"></canvas>
             </div>
             <div class="card" id="eth">
-                <h2>Ethereum</h2>
-                <p class="price"></p>
+                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=025" alt="Ethereum" />
+                <span class="price"></span>
+                <canvas id="eth-chart" class="chart"></canvas>
             </div>
             <div class="card" id="ltc">
-                <h2>Litecoin</h2>
-                <p class="price"></p>
+                <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=025" alt="Litecoin" />
+                <span class="price"></span>
+                <canvas id="ltc-chart" class="chart"></canvas>
             </div>
         </div>
     </div>
+    </div>
+
+
+    <script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
+
     <script src="script.js"></script>
+
 </body>
 
 </html>
