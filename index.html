@@ -16,64 +16,55 @@
     <div class="container">
         <div class="news-feed">
             <div class="greeting"></div>
+            <div class="crypto-box">
+                <div class="card" id="btc">
+                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=025" alt="Bitcoin" />
+                    <span class="price"></span>
+                </div>
+                <div class="card" id="eth">
+                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=025" alt="Ethereum" />
+                    <span class="price"></span>
+                </div>
+                <div class="card" id="ltc">
+                    <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=025" alt="Litecoin" />
+                    <span class="price"></span>
+                </div>
+            </div>
+
+            <div class="weather-marquee">
+                <div class="weather-items">
+                    <div class="weather-item" id="oslo">
+                        <h2>Oslo</h2>
+                        <p class="temperature"></p>
+                        <i class="wi weather-icon"></i>
+                    </div>
+                    <div class="weather-item" id="sarpsborg">
+                        <h2>Sarpsborg</h2>
+                        <p class="temperature"></p>
+                        <i class="wi weather-icon"></i>
+                    </div>
+                    <div class="weather-item" id="copenhagen">
+                        <h2>København</h2>
+                        <p class="temperature"></p>
+                        <i class="fas weather-icon"></i>
+                    </div>
+                    <div class="weather-item" id="nice">
+                        <h2>Nice</h2>
+                        <p class="temperature"></p>
+                        <i class="wi weather-icon"></i>
+                    </div>
+                    <div class="weather-item" id="monaco">
+                        <h2>Monaco</h2>
+                        <p class="temperature"></p>
+                        <i class="wi weather-icon"></i>
+                    </div>
+                </div>
+            </div>
             <div class="marquee-news">
             </div>
         </div>
     </div>
 
-    <div class="main-div">
-        <div class="weather-marquee">
-            <div class="weather-items">
-                <div class="weather-item" id="oslo">
-                    <h2>Oslo</h2>
-                    <p class="temperature"></p>
-                    <i class="wi weather-icon"></i>
-                </div>
-                <div class="weather-item" id="sarpsborg">
-                    <h2>Sarpsborg</h2>
-                    <p class="temperature"></p>
-                    <i class="wi weather-icon"></i>
-                </div>
-                <div class="weather-item" id="copenhagen">
-                    <h2>København</h2>
-                    <p class="temperature"></p>
-                    <i class="fas weather-icon"></i>
-                </div>
-                <div class="weather-item" id="nice">
-                    <h2>Nice</h2>
-                    <p class="temperature"></p>
-                    <i class="wi weather-icon"></i>
-                </div>
-                <div class="weather-item" id="monaco">
-                    <h2>Monaco</h2>
-                    <p class="temperature"></p>
-                    <i class="wi weather-icon"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard">
-            <div class="crypto-box">
-                <div class="card" id="btc">
-                    <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=025" alt="Bitcoin" />
-                    <span class="price"></span>
-                    <canvas id="btc-chart" class="chart"></canvas>
-                </div>
-                <div class="card" id="eth">
-                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=025" alt="Ethereum" />
-                    <span class="price"></span>
-                    <canvas id="eth-chart" class="chart"></canvas>
-                </div>
-                <div class="card" id="ltc">
-                    <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=025" alt="Litecoin" />
-                    <span class="price"></span>
-                    <canvas id="ltc-chart" class="chart"></canvas>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    </div>
 
 
     <script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>

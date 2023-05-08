@@ -58,7 +58,6 @@ async function fetchWeatherData(lat, lon) {
     const data = await response.json();
     const temp = data.properties.timeseries[0].data.instant.details.air_temperature;
     const symbolCode = data.properties.timeseries[0].data.next_1_hours.summary.symbol_code;
-    console.log(data)
     return { temperature: temp, symbolCode: symbolCode };
 }
 
@@ -189,6 +188,15 @@ setInterval(function() {
     items.forEach(item => {
       const title = item.title;
       const description = item.content;
+      const date = item.date;
+  
+      const norwegianDate = new Intl.DateTimeFormat('no-NO', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: "2-digit"
+      }).format(new Date(date));
   
       const card = document.createElement('div');
       card.classList.add('card-news');
@@ -196,6 +204,10 @@ setInterval(function() {
       const h2Elem = document.createElement('h3');
       h2Elem.innerText = title;
       card.appendChild(h2Elem);
+  
+      const dateElem = document.createElement('small');
+      dateElem.innerText = norwegianDate;
+      card.appendChild(dateElem);
   
       const hr = document.createElement('hr');
       card.appendChild(hr);
@@ -211,6 +223,7 @@ setInterval(function() {
   }
   
   updateNewsFeed();
+  
   
   
   
