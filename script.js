@@ -191,7 +191,7 @@ setInterval(function() {
       const description = item.contentSnippet;
   
       const card = document.createElement('div');
-      card.classList.add('card');
+      card.classList.add('card-news');
   
       const h2Elem = document.createElement('h2');
       h2Elem.innerText = category;
