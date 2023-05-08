@@ -142,7 +142,7 @@ function getWeatherIconClass(symbolCode) {
 
 
 updateWeather();
-setInterval(updateWeather, 600000);
+setInterval(updateWeather, 1800000);
 
 setInterval(function() {
     location.reload();
@@ -178,48 +178,36 @@ setInterval(function() {
     const response = await fetch(proxyUrl);
     const data = await response.json();
     const feed = await parser.parseString(data.contents);
-    console.log(feed)
+    console.log(feed);
   
-    const items = feed.items;
-    const marqueeElem = document.querySelector('.marquee');
+    const items = feed.items.slice(0, 3); // Limit to the first 3 items
+    const container = document.querySelector('.container');
+    const newsCards = document.createElement('div');
+    newsCards.classList.add('news-cards');
   
-    marqueeElem.innerHTML = '';
-  
-
-    const newsList = document.createElement('ul');
     items.forEach(item => {
       const category = item.categories[0];
       const description = item.contentSnippet;
-      const liElem = document.createElement('li');
-      liElem.innerHTML = `<span class="category">${category} ~</span>  ${description}`;
-      newsList.appendChild(liElem);
+  
+      const card = document.createElement('div');
+      card.classList.add('card');
+  
+      const h2Elem = document.createElement('h2');
+      h2Elem.innerText = category;
+      card.appendChild(h2Elem);
+  
+      const pElem = document.createElement('p');
+      pElem.innerText = description;
+      card.appendChild(pElem);
+  
+      newsCards.appendChild(card);
     });
   
-
-    const newsItems = newsList.querySelectorAll('li');
-    const newsCount = newsItems.length;
-    for (let i = 0; i < newsCount; i++) {
-      const cloneElem = newsItems[i].cloneNode(true);
-      newsList.appendChild(cloneElem);
-    }
-  
-
-    marqueeElem.appendChild(newsList);
-  
-
-    marqueeElem.style.whiteSpace = 'nowrap';
-    marqueeElem.style.overflow = 'hidden';
-    newsList.style.display = 'inline-block';
-    newsList.style.padding = '0 1.5rem';
-    newsList.style.animation = `marquee ${newsCount * 10}s linear infinite`;
-  
-
-    const categoryElems = newsList.querySelectorAll('.category');
-    categoryElems.forEach(categoryElem => {
-      categoryElem.style.fontWeight = 'bold';
-    });
+    container.appendChild(newsCards);
   }
   
   updateNewsFeed();
+  
+  
   
   
