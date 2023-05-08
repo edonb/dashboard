@@ -1,28 +1,55 @@
 const apiUrl = "https://api.binance.com/api/v3/ticker/24hr";
 
-
 const symbols = {
-    btc: "BTCUSDT",
-    eth: "ETHUSDT",
-    ltc: "LTCUSDT"
+  btc: "BTCUSDT",
+  eth: "ETHUSDT",
+  ltc: "LTCUSDT"
+};
+
+const previousPrices = {
+  btc: null,
+  eth: null,
+  ltc: null
 };
 
 async function fetchData(symbol) {
-    const response = await fetch(`${apiUrl}?symbol=${symbol}`);
-    const data = await response.json();
-    return data.lastPrice;
+  const response = await fetch(`${apiUrl}?symbol=${symbol}`);
+  const data = await response.json();
+  return data.lastPrice;
+}
+
+function showArrow(coin, direction) {
+  const arrowElem = document.createElement("span");
+  arrowElem.classList.add("arrow", direction);
+  document.getElementById(coin).appendChild(arrowElem);
+
+  setTimeout(() => {
+    arrowElem.remove();
+  }, 5000);
 }
 
 async function updatePrices() {
-    for (const coin in symbols) {
-        const price = Number(await fetchData(symbols[coin]));
-        document.getElementById(coin).querySelector('.price').textContent = `$ ${price.toFixed(2)}`;
-        
+  for (const coin in symbols) {
+    const price = Number(await fetchData(symbols[coin]));
+
+    if (previousPrices[coin] !== null) {
+      if (price > previousPrices[coin]) {
+        showArrow(coin, "up");
+      } else if (price < previousPrices[coin]) {
+        showArrow(coin, "down");
+      } else {
+        showArrow(coin, "right");
+      }
     }
+
+    previousPrices[coin] = price;
+    document.getElementById(coin).querySelector(".price").textContent = `$ ${price.toFixed(2)}`;
+  }
 }
 
 updatePrices();
-setInterval(updatePrices, 60000); 
+setInterval(updatePrices, 60000);
+
 
 const metApiUrl = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
 
@@ -253,3 +280,18 @@ setInterval(function() {
   });
   
   
+  async function getNokToUsdRate() {
+    const response = await fetch(
+      "https://api.exchangerate.host/latest?base=USD&symbols=NOK"
+    );
+    const data = await response.json();
+    return data.rates.NOK;
+  }
+  async function calculateUSDValue() {
+    const usdToNokRate = await getNokToUsdRate();
+    const usdAmount = 1;
+    const nokAmount = usdAmount * usdToNokRate;
+    document.getElementById("nok-usd").querySelector(".price").textContent = `${nokAmount.toFixed(2)} NOK`;
+  }
+  
+  calculateUSDValue();

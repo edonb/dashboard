@@ -336,11 +336,31 @@ h2 {
     margin-right: 20px;
   }
 
-
-
-
-
 h3 {
   padding-top: 1px;
 }
 
+
+
+.arrow {
+  display: inline-block;
+  margin-left: 5px;
+  opacity: 1;
+  transition: opacity 15s ease;
+  font-weight: bold;
+}
+
+.arrow.up::before {
+  content: "↑";
+  color: green;
+}
+
+.arrow.down::before {
+  content: "↓";
+  color: red;
+}
+
+.arrow.right::before {
+  content: "↑";
+  color: blue;
+}
