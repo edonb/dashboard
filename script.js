@@ -68,7 +68,10 @@ async function updateWeather() {
       const iconClass = getWeatherIconClass(symbolCode);
       const locationElement = document.getElementById(location);
       locationElement.querySelector('.temperature').textContent = `${temperature.toFixed(1)}°C`;
-      locationElement.querySelector('.weather-icon').className = `wi ${iconClass}`;
+  
+      const weatherIcon = locationElement.querySelector('.weather-icon');
+      weatherIcon.classList.remove(...weatherIcon.classList);
+      weatherIcon.classList.add('wi', iconClass);
     }
   }
   
@@ -141,8 +144,6 @@ function getWeatherIconClass(symbolCode) {
     }
 
 
-updateWeather();
-setInterval(updateWeather, 1800000);
 
 setInterval(function() {
     location.reload();
@@ -178,7 +179,6 @@ setInterval(function() {
     const response = await fetch(proxyUrl);
     const data = await response.json();
     const feed = await parser.parseString(data.contents);
-    console.log(feed);
   
     const items = feed.items.slice(0, 3); // Limit to the first 3 items
     const container = document.querySelector('.container');
@@ -189,6 +189,7 @@ setInterval(function() {
       const title = item.title;
       const description = item.content;
       const date = item.date;
+      const link = item.link;
   
       const norwegianDate = new Intl.DateTimeFormat('no-NO', {
         year: 'numeric',
@@ -204,6 +205,8 @@ setInterval(function() {
       const h2Elem = document.createElement('h3');
       h2Elem.innerText = title;
       card.appendChild(h2Elem);
+
+
   
       const dateElem = document.createElement('small');
       dateElem.innerText = norwegianDate;
@@ -215,6 +218,16 @@ setInterval(function() {
       const pElem = document.createElement('p');
       pElem.innerText = description;
       card.appendChild(pElem);
+
+      const linkElem = document.createElement('a');
+      linkElem.href = link
+
+      const imgElem = document.createElement('img');
+      imgElem.src = "https://info.nrk.no/wp-content/uploads/2019/09/nrk_nyheter_rgb.png"; 
+      imgElem.alt = "NRK nyheter - "+title;
+      
+      linkElem.appendChild(imgElem);
+      card.appendChild(linkElem);
   
       newsCards.appendChild(card);
     });
