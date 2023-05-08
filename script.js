@@ -173,7 +173,7 @@ setInterval(function() {
   };
 
   async function updateNewsFeed() {
-    const rssUrl = 'https://www.vg.no/rss/feed?categories=1069%2C1070';
+    const rssUrl = 'https://www.nrk.no/nyheter/siste.rss';
     const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
     const parser = new RSSParser();
     const response = await fetch(proxyUrl);
@@ -187,15 +187,18 @@ setInterval(function() {
     newsCards.classList.add('news-cards');
   
     items.forEach(item => {
-      const category = item.categories[0];
-      const description = item.contentSnippet;
+      const title = item.title;
+      const description = item.content;
   
       const card = document.createElement('div');
       card.classList.add('card-news');
   
-      const h2Elem = document.createElement('h2');
-      h2Elem.innerText = category;
+      const h2Elem = document.createElement('h3');
+      h2Elem.innerText = title;
       card.appendChild(h2Elem);
+  
+      const hr = document.createElement('hr');
+      card.appendChild(hr);
   
       const pElem = document.createElement('p');
       pElem.innerText = description;
