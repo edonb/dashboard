@@ -58,6 +58,7 @@ async function fetchWeatherData(lat, lon) {
     const data = await response.json();
     const temp = data.properties.timeseries[0].data.instant.details.air_temperature;
     const symbolCode = data.properties.timeseries[0].data.next_1_hours.summary.symbol_code;
+    console.log(data)
     return { temperature: temp, symbolCode: symbolCode };
 }
 
