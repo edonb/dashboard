@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptocurrency Dashboard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -16,6 +17,12 @@
     <div class="container">
         <div class="news-feed">
             <div class="greeting"></div>
+            <audio id="nrkRadio" preload="auto" src="https://lyd.nrk.no/nrk_radio_p3_mp3_h" autoplay></audio>
+            <div class="custom-controls">
+                <button id="playPauseBtn" class="play-pause-btn" onclick="playPause()">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
             <div class="crypto-box">
                 <div class="card" id="btc">
                     <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=025" alt="Bitcoin" />
@@ -29,8 +36,8 @@
                     <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg?v=025" alt="Litecoin" />
                     <span class="price"></span>
                 </div>
-            </div>
 
+            </div>
             <div class="weather-marquee">
                 <div class="weather-items">
                     <div class="weather-item" id="oslo">
@@ -63,12 +70,9 @@
             <div class="marquee-news">
             </div>
         </div>
+
     </div>
-
-
-
     <script src="https://unpkg.com/rss-parser/dist/rss-parser.min.js"></script>
-
     <script src="script.js"></script>
 
 </body>

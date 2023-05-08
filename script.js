@@ -237,7 +237,19 @@ setInterval(function() {
   
   updateNewsFeed();
   
+  document.addEventListener('DOMContentLoaded', function() {
+    const nrkRadio = document.getElementById('nrkRadio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
   
-  
+    playPauseBtn.addEventListener('click', function() {
+      if (nrkRadio.paused) {
+        nrkRadio.play();
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        nrkRadio.pause();
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  });
   
   
