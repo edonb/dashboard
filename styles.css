@@ -39,6 +39,9 @@ h1 {
   margin: 1em 0; 
 }
 
+.news-cards h3 { 
+  text-align: center;
+}
 
 .card-news {
   margin: 0 auto;
@@ -51,7 +54,6 @@ h1 {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   display: none; 
   min-height: 40rem;
-  
 }
 
 .dot-container {
@@ -178,9 +180,11 @@ h2 {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
+    
 }
 
 .weather-item {
+  display: none;
   background-color: #1d1d1d;
   padding: 1rem;
   border-radius: 1rem;
