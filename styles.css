@@ -114,11 +114,12 @@ hr {
 }
   
 .crypto-box {
-    display: flex;
-    align-items: center;
-    width: 60%;
-    margin: 0 auto;
-    height: 0rem;
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  height: 0rem;
+
 }
 
 .card {
@@ -129,6 +130,7 @@ hr {
     background-color: #1d1d1d;
     border-radius: 1rem;
     margin-left: 1rem;
+    display: none;
 }
   
 .card h2 {
@@ -180,7 +182,6 @@ h2 {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
-    
 }
 
 .weather-item {
@@ -262,9 +263,11 @@ h2 {
   height: 100px;
   margin-top: 6rem;
   border-radius: 5px;
+  display: none;
 }
   
 .weather-items {
+  display: none;
   display: flex;
   gap: 20px;
   overflow: hidden;

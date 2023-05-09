@@ -1,5 +1,7 @@
 const apiUrl = "https://api.binance.com/api/v3/ticker/24hr";
-
+const metApiUrl = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
+const cards = document.querySelectorAll('.card');
+const weather = document.querySelectorAll('.weather-marquee');
 const symbols = {
   btc: "BTCUSDT",
   eth: "ETHUSDT",
@@ -14,8 +16,8 @@ const previousPrices = {
 
 async function fetchData(symbol) {
   const response = await fetch(`${apiUrl}?symbol=${symbol}`);
-  const data = await response.json();
-  return data.lastPrice;
+  const { lastPrice } = await response.json();
+  return Number(lastPrice);
 }
 
 function showArrow(coin, direction) {
@@ -44,37 +46,25 @@ async function updatePrices() {
 
     previousPrices[coin] = price;
     document.getElementById(coin).querySelector(".price").textContent = `$ ${price.toFixed(2)}`;
+
+
   }
+  cards.forEach(card => {
+    card.style.display = 'block';
+  });
 }
 
 updatePrices();
 setInterval(updatePrices, 60000);
 
-
-const metApiUrl = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
-
 const locations = {
-    oslo: {
-        lat: 59.9139,
-        lon: 10.7522
-    },
-    sarpsborg: {
-        lat: 59.2831,
-        lon: 11.1097
-    },
-    copenhagen: {
-        lat: 55.6761,
-        lon: 12.5683
-    },
-    nice: {
-        lat: 43.7102,
-        lon: 7.2620
-    },
-    monaco: {
-        lat: 43.7384,
-        lon: 7.4246 
-    }
+  oslo: { lat: 59.9139, lon: 10.7522 },
+  sarpsborg: { lat: 59.2831, lon: 11.1097 },
+  copenhagen: { lat: 55.6761, lon: 12.5683 },
+  nice: { lat: 43.7102, lon: 7.2620 },
+  monaco: { lat: 43.7384, lon: 7.4246 }
 };
+
 
 function fetchPolyfill(url, options) {
   return new Promise(function(resolve, reject) {
@@ -118,6 +108,9 @@ async function updateWeather() {
       weatherIcon.classList.remove(...weatherIcon.classList);
       weatherIcon.classList.add('wi', iconClass);
     }
+    weather.forEach(weather => {
+      weather.style.display = 'block';
+    });
 }
   
 
@@ -225,12 +218,12 @@ setInterval(function() {
     const data = await response.json();
     const feed = await parser.parseString(data.contents);
   
-    const items = feed.items.slice(0, 5); // Limit to the first 5 items
+    const items = feed.items.slice(0, 5); 
     const container = document.querySelector('.container');
     const newsCards = document.createElement('div');
     newsCards.classList.add('news-cards');
 
-    // Create dot container
+
     const dotContainer = document.createElement('div');
     dotContainer.classList.add('dot-container');
   
@@ -273,7 +266,6 @@ setInterval(function() {
       newsCards.appendChild(card);
     });
 
-    // Create dots for each news card
     for (let i = 0; i < items.length; i++) {
       const dot = document.createElement('div');
       dot.classList.add('dot');
@@ -308,7 +300,6 @@ function switchActiveNewsItem() {
 
   setInterval(switchActiveNewsItem, 60000); 
   
-  setInterval(updateNewsFeed, 900000); 
   updateNewsFeed();
 
   
