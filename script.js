@@ -76,18 +76,36 @@ const locations = {
     }
 };
 
+function fetchPolyfill(url, options) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method || 'GET', url);
+    if (options.headers) {
+      Object.keys(options.headers).forEach(function(key) {
+        xhr.setRequestHeader(key, options.headers[key]);
+      });
+    }
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(JSON.parse(xhr.response));
+      } else {
+        reject(new Error(xhr.statusText));
+      }
+    };
+    xhr.onerror = function() {
+      reject(new Error('Network Error'));
+    };
+    xhr.send(options.body);
+  });
+}
+
 async function fetchWeatherData(lat, lon) {
-    const response = await fetch(`${metApiUrl}?lat=${lat}&lon=${lon}`, {
-        headers: {
-            'User-Agent': 'YourAppName/1.0 yourname@example.com'
-        }
+    const data = await fetchPolyfill(`${metApiUrl}?lat=${lat}&lon=${lon}`, {
     });
-    const data = await response.json();
     const temp = data.properties.timeseries[0].data.instant.details.air_temperature;
     const symbolCode = data.properties.timeseries[0].data.next_1_hours.summary.symbol_code;
     return { temperature: temp, symbolCode: symbolCode };
 }
-
 
 async function updateWeather() {
     for (const location in locations) {
@@ -100,7 +118,7 @@ async function updateWeather() {
       weatherIcon.classList.remove(...weatherIcon.classList);
       weatherIcon.classList.add('wi', iconClass);
     }
-  }
+}
   
 
 function sleep(ms) {
