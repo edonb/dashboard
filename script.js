@@ -291,7 +291,24 @@ setInterval(function() {
     const usdToNokRate = await getNokToUsdRate();
     const usdAmount = 1;
     const nokAmount = usdAmount * usdToNokRate;
-    document.getElementById("nok-usd").querySelector(".price").textContent = `${nokAmount.toFixed(2)} NOK`;
+    document.getElementById("usd-nok").querySelector(".price").textContent = `${nokAmount.toFixed(2)} NOK`;
   }
   
   calculateUSDValue();
+
+  async function getEuroToNokRate() {
+    const response = await fetch(
+      "https://api.exchangerate.host/latest?base=EUR&symbols=NOK"
+    );
+    const data = await response.json();
+    return data.rates.NOK;
+  }
+  
+  async function calculateEURValue() {
+    const euroToNokRate = await getEuroToNokRate();
+    const euroAmount = 1;
+    const nokAmount = euroAmount * euroToNokRate;
+    document.getElementById("eur-nok").querySelector(".price").textContent = `${nokAmount.toFixed(2)} NOK`;
+  }
+  
+  calculateEURValue();
