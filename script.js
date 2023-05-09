@@ -207,12 +207,16 @@ setInterval(function() {
     const data = await response.json();
     const feed = await parser.parseString(data.contents);
   
-    const items = feed.items.slice(0, 3); // Limit to the first 3 items
+    const items = feed.items.slice(0, 5); // Limit to the first 5 items
     const container = document.querySelector('.container');
     const newsCards = document.createElement('div');
     newsCards.classList.add('news-cards');
+
+    // Create dot container
+    const dotContainer = document.createElement('div');
+    dotContainer.classList.add('dot-container');
   
-    items.forEach(item => {
+    items.forEach((item, index) => {
       const title = item.title;
       const description = item.content;
       const date = item.date;
@@ -228,13 +232,15 @@ setInterval(function() {
   
       const card = document.createElement('div');
       card.classList.add('card-news');
+
+      if (index === 0) {
+        card.classList.add('active');
+      }
   
       const h2Elem = document.createElement('h3');
       h2Elem.innerText = title;
       card.appendChild(h2Elem);
 
-
-  
       const dateElem = document.createElement('small');
       dateElem.innerText = norwegianDate;
       card.appendChild(dateElem);
@@ -245,24 +251,48 @@ setInterval(function() {
       const pElem = document.createElement('p');
       pElem.innerText = description;
       card.appendChild(pElem);
-
-      const linkElem = document.createElement('a');
-      linkElem.href = link
-
-      const imgElem = document.createElement('img');
-      imgElem.src = "https://info.nrk.no/wp-content/uploads/2019/09/nrk_nyheter_rgb.png"; 
-      imgElem.alt = "NRK nyheter - "+title;
-      
-      linkElem.appendChild(imgElem);
-      card.appendChild(linkElem);
   
       newsCards.appendChild(card);
     });
-  
+
+    // Create dots for each news card
+    for (let i = 0; i < items.length; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+        
+      if (i === 0) {
+        dot.classList.add('active');
+      }
+    
+      dotContainer.appendChild(dot);
+    }
+      
     container.appendChild(newsCards);
-  }
+    container.appendChild(dotContainer);
+}
+
+
+function switchActiveNewsItem() {
+  const cards = Array.from(document.querySelectorAll('.card-news'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  let activeIndex = cards.findIndex(card => card.classList.contains('active'));
+
+
+  cards[activeIndex].classList.remove('active');
+  dots[activeIndex].classList.remove('active');
+
+
+  activeIndex = (activeIndex + 1) % cards.length;
+  cards[activeIndex].classList.add('active');
+  dots[activeIndex].classList.add('active');
+}
   
+
+  setInterval(switchActiveNewsItem, 60000); 
+  
+  setInterval(updateNewsFeed, 900000); 
   updateNewsFeed();
+
   
   document.addEventListener('DOMContentLoaded', function() {
     const nrkRadio = document.getElementById('nrkRadio');
@@ -312,3 +342,6 @@ setInterval(function() {
   }
   
   calculateEURValue();
+
+
+  
